@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<!-- Test Ilmu -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-<!-- test -->
+
 <body>
     <div class="container mt-5">
         <div class="row custom-table mt-5 rounded-3">
@@ -55,7 +55,7 @@
                         </tr>
                         <tr>
                             <td scope="row">2</td>
-                            <td>Jacob</td>
+                            <td>Jamal</td>
                             <td>tdornton</td>
                             <td>@fat</td>
                             <td><img src="image2.jpg" alt="Image 2" class="img-fluid"></td>
