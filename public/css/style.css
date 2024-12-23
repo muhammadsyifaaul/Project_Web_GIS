@@ -1,0 +1,44 @@
+.custom-table {
+    background-color: #ffd0d8;
+  }
+  .custom-table thead th {
+    background-color: #ffd0d8;
+  }
+
+  .custom-table {
+background-color: #ffd0d8;
+border-spacing: 0 10px;
+border-collapse: separate; 
+}
+
+.custom-table tbody tr {
+background-color: blueviolet;
+border-radius: 10px;
+}
+
+  tbody tr td{
+    margin-bottom: 10px;
+  }
+  .custom-table .border-rad {
+    border-radius: 10px;
+    background-color: inherit;
+    padding: 10px;
+  }
+  .custom-table td:nth-child(5) {
+    width: 20%;
+    border-radius:0 10px 10px 0;
+  }
+  .custom-table td:nth-child(1) {
+    width: 5%;
+    border-radius: 10px 0 0 10px;
+  }
+  .custom-table td:nth-child(4) {
+    width: 20%;
+  }
+   tbody tr:not(:last-child) {
+margin-bottom: 10px;
+}
+.search-input input {
+  width: 300px;
+  height: 30px;
+}
