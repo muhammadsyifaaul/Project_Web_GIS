@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src='/images/logo.png' alt="Logo">
+            <img src='/images/logosmg.png' alt="Logo">
         </div>
         <div class="menu">
             <a href="#">Beranda</a>
@@ -24,7 +24,7 @@
             <a href="#">Wisata</a>
             <a href="#">Kontak</a>
         </div>
-        <div class="hero">
+        <div class="container-fluid hero">
             <h1>Daftar Informasi Kelurahan Di Kota Semarang</h1>
         </div>
     </nav>
