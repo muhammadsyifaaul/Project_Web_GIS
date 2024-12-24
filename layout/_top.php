@@ -1,8 +1,8 @@
 <?php
-require_once '../helper/auth.php';
+// require_once '../helper/auth.php';
 
-isLogin();
-?>
+// isLogin();
+// ?>
 
 <!DOCTYPE html>
 <html lang="en">

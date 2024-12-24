@@ -2,7 +2,7 @@
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
       <a href="index.php">
-        <img src="../assets/img/logo Dis.png" alt="logo" width="150">
+        <img src="{{asset('/images/logo Dis.png')}}" alt="logo" width="150">
       </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">

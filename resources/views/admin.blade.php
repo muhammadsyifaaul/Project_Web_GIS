@@ -1,14 +1,20 @@
 <?php
 require_once '../layout/_top.php';
-require_once '../helper/connection.php';
+require_once '../layout/_sidenav.php';
+// require_once '../helper/connection.php';
 
-$penyakit = mysqli_query($connection, "SELECT COUNT(*) FROM penyakit");
-$gejala = mysqli_query($connection, "SELECT COUNT(*) FROM gejala");
-$obat = mysqli_query($connection, "SELECT COUNT(*) FROM obat");
+// $penyakit = mysqli_query($connection, "SELECT COUNT(*) FROM penyakit");
+// $gejala = mysqli_query($connection, "SELECT COUNT(*) FROM gejala");
+// $obat = mysqli_query($connection, "SELECT COUNT(*) FROM obat");
 
-$penyakit = mysqli_fetch_array($penyakit)[0];
-$gejala = mysqli_fetch_array($gejala)[0];
-$obat = mysqli_fetch_array($obat)[0];
+// $penyakit = mysqli_fetch_array($penyakit)[0];
+// $gejala = mysqli_fetch_array($gejala)[0];
+// $obat = mysqli_fetch_array($obat)[0];
+
+// <?= $penyakit ?
+// <?= $obat ?> 
+<!-- //             $obat$penyakit$gejala  -->
+<!-- $gejala ?> -->
 ?>
 
 <section class="section">
@@ -28,7 +34,8 @@ $obat = mysqli_fetch_array($obat)[0];
             <h4>Total Lokasi</h4>
           </div>
           <div class="card-body">
-            <?= $penyakit ?>
+            <!--  -->
+             Kelurahan
           </div>
         </div>
       </div>
@@ -44,7 +51,8 @@ $obat = mysqli_fetch_array($obat)[0];
             <h4>Total No Telepon</h4>
           </div>
           <div class="card-body">
-            <?= $gejala ?>
+            <!-- -->
+            No Telepon
           </div>
         </div>
       </div>
@@ -60,7 +68,8 @@ $obat = mysqli_fetch_array($obat)[0];
             <h4>Total Foto</h4>
           </div>
           <div class="card-body">
-            <?= $obat ?>
+            <!--  -->
+            Foto
           </div>
         </div>
       </div>
@@ -85,15 +94,18 @@ $obat = mysqli_fetch_array($obat)[0];
             <tbody>
               <tr>
                 <td>Total Kecamatan</td>
-                <td><?= $penyakit ?></td>
+                <!-- <td></td> -->
+                <td>Kecamatan</td>
               </tr>
               <tr>
                 <td>Total Kelurahan</td>
-                <td><?= $gejala ?></td>
+                <!-- <td></td> -->
+                <td>Kelurahan</td>
               </tr>
               <tr>
                 <td>Total Gambar</td>
-                <td><?= $obat ?></td>
+                <!-- <td></td> -->
+                <td>Foto</td>
               </tr>
             </tbody>
           </table>

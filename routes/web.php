@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LocationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,6 +10,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
-use App\Http\Controllers\LocationController;
+
 
 Route::get('/location', [LocationController::class, 'showLocationAndDistance']);
+Route::get('/admin', function () {
+    return view('admin');
+});
