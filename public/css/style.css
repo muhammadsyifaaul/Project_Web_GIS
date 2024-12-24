@@ -1,44 +1,146 @@
 .custom-table {
-    background-color: #ffd0d8;
-  }
-  .custom-table thead th {
-    background-color: #ffd0d8;
-  }
+  background-color: #ffd0d8;
+}
 
-  .custom-table {
-background-color: #ffd0d8;
-border-spacing: 0 10px;
-border-collapse: separate; 
+.custom-table thead th {
+  background-color: #ffd0d8;
+}
+
+.custom-table {
+  background-color: #ffd0d8;
+  border-spacing: 0 10px;
+  border-collapse: separate;
 }
 
 .custom-table tbody tr {
-background-color: blueviolet;
-border-radius: 10px;
+  background-color: blueviolet;
+  border-radius: 10px;
 }
 
-  tbody tr td{
-    margin-bottom: 10px;
-  }
-  .custom-table .border-rad {
-    border-radius: 10px;
-    background-color: inherit;
-    padding: 10px;
-  }
-  .custom-table td:nth-child(5) {
-    width: 20%;
-    border-radius:0 10px 10px 0;
-  }
-  .custom-table td:nth-child(1) {
-    width: 5%;
-    border-radius: 10px 0 0 10px;
-  }
-  .custom-table td:nth-child(4) {
-    width: 20%;
-  }
-   tbody tr:not(:last-child) {
-margin-bottom: 10px;
+tbody tr td {
+  margin-bottom: 10px;
 }
+
+.custom-table .border-rad {
+  border-radius: 10px;
+  background-color: inherit;
+  padding: 10px;
+}
+
+.custom-table td:nth-child(5) {
+  width: 20%;
+  border-radius: 0 10px 10px 0;
+}
+
+.custom-table td:nth-child(1) {
+  width: 5%;
+  border-radius: 10px 0 0 10px;
+}
+
+.custom-table td:nth-child(4) {
+  width: 20%;
+}
+
+tbody tr:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .search-input input {
   width: 300px;
   height: 30px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar .menu a {
+  text-decoration: none;
+  color: #241a1a;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navbar .menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.hero {
+  background-image: url('/images/dkk.png');
+  background-size: cover;
+  /* Membuat gambar menutupi seluruh area hero */
+  background-position: center;
+  /* Memusatkan gambar */
+  height: 50vh;
+  /* Atur tinggi sesuai kebutuhan */
+  position: relative;
+  width: 1000%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Untuk teks agar rata tengah */
+  color: #1d1919;
+  /* Ubah warna teks agar kontras dengan latar */
+}
+
+.hero h1 {
+  position: relative;
+  font-family: 'ubuntu', sans-serif;
+  font-size: 4rem;/* Sesuaikan ukuran teks */
+  display: block;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(11, 8, 10, 0.7);
+  /* Tambahkan bayangan teks agar lebih terbaca */
+}
+
+.hero img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  /* Atur agar proporsional */
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  /* Mengisi area tanpa distorsi */
+}
+
+@media (max-width: 800px) {
+  .hero {
+    img {
+      max-width: 110%;
+      height: auto;
+    }
+  }
 }
