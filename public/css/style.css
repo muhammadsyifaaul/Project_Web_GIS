@@ -53,6 +53,7 @@ tbody tr:not(:last-child) {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: whitesmoke;
 }
 
 .navbar {
