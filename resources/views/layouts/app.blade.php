@@ -15,12 +15,21 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <style>
+        .navbar-brand {
+            display: none;
+        }
+        .navbar-toggler{
+            display: none;
+        }
+    </style>
 <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="sidebar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,6 +81,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
         </nav>
 
         <main class="py-4">

@@ -1,9 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
 @extends('layouts.app')
-
-@section('content')
+@section(section: 'content')
+<style>
+    
+</style>
 <div class="container">
+    <img src='/images/logosmg.png' alt="Logo2">
     <h1>Add New Location</h1>
-
     <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -30,3 +41,6 @@
     </form>
 </div>
 @endsection
+
+</body>
+</html>
