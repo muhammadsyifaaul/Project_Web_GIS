@@ -15,6 +15,7 @@ class DashboardController extends Controller
 
     return view('dashboard');
 }
-
+}
 
 ?>
+<!-- apa yaa -->
