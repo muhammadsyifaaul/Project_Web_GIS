@@ -9,9 +9,7 @@
 <body>
 @extends('layouts.app')
 @section(section: 'content')
-<style>
-    
-</style>
+
 <div class="container">
     <img src='/images/logosmg.png' alt="Logo2">
     <h1>Add New Location</h1>

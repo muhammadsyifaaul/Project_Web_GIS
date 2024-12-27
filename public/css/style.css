@@ -53,6 +53,7 @@ tbody tr:not(:last-child) {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: whitesmoke;
 }
 
 .navbar {
@@ -146,98 +147,99 @@ body {
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
+font-family: Arial, sans-serif;
+background-color: #f9f9f9;
+margin: 0;
+padding: 0;
 }
 
 .container {
-  max-width: 600px;
-  margin: 50px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+max-width: 600px;
+margin: 50px auto;
+background: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+text-align: center;
+color: #333;
+margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+margin-bottom: 15px;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  color: #555;
-  font-weight: bold;
+display: block;
+margin-bottom: 5px;
+color: #555;
+font-weight: bold;
 }
 
 input[type="text"],
 input[type="file"],
 button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
 }
 
 input[type="text"]:focus,
 input[type="file"]:focus {
-  border-color: #66afe9;
-  outline: none;
-  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+border-color: #66afe9;
+outline: none;
+box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
 }
 
 button {
-  background-color: #044ea1;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+background-color: #044ea1;
+color: #fff;
+border: none;
+cursor: pointer;
+font-weight: bold;
 }
 
 button:hover {
-  background-color: #044ea1;
+background-color: #044ea1;
 }
 
 .container img {
-  width: 200px; /* Adjust width */
-  height: auto; /* Maintain aspect ratio */
-  margin: 0 auto; /* Center the logo */
+width: 200px; /* Adjust width */
+height: auto; /* Maintain aspect ratio */
+margin: 0 auto; /* Center the logo */
 }
 
 .sidebar {
-  width: 200px;
-  height: 100vh; /* Full height of the viewport */
-  background-color: #f8f9fa; /* Light background */
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+width: 200px;
+height: 100vh; /* Full height of the viewport */
+background-color: #f8f9fa; /* Light background */
+position: fixed;
+top: 0;
+left: 0;
+padding: 20px;
+box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar a {
-  text-decoration: none;
-  color: #333; /* Darker text color */
-  display: block;
-  margin-bottom: 15px;
-  font-size: 16px;
+text-decoration: none;
+color: #333; /* Darker text color */
+display: block;
+margin-bottom: 15px;
+font-size: 16px;
 }
 
 .sidebar a:hover {
-  color: #0056b3; /* Blue hover effect */
+color: #0056b3; /* Blue hover effect */
 }
 
 .main-content {
-  margin-left: 220px; /* Offset for the sidebar */
-  padding: 20px;
+margin-left: 220px; /* Offset for the sidebar */
+padding: 20px;
 }
+

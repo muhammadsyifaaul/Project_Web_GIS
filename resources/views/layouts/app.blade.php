@@ -14,16 +14,14 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        .navbar-brand {
-            display: none;
-        }
-        .navbar-toggler{
-            display: none;
-        }
-    </style>
+   
 <script src="{{ asset('js/app.js') }}" defer></script>
+
+
+    @viteReactRefresh
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 <body>
