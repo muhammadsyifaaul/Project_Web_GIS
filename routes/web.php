@@ -8,44 +8,39 @@ use App\Http\Middleware\CheckIfAdmin;
 use App\Http\Controllers\LocationController;
 
 Route::get('/', function () {
-    // Cek apakah pengguna sudah login
+    // Check if user is authenticated
     if (Auth::check()) {
-        // Jika user login, arahkan ke dashboard mereka
+        // If logged in, redirect to user dashboard
         return redirect()->route('dashboard');
     }
 
-    // Jika tidak login, arahkan ke halaman login
+    // If not logged in, redirect to login page
     return redirect()->route('login');
 })->name('welcome');
 
-// Route untuk halaman login
+// User login routes
 Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserLoginController::class, 'login'])->name('login.submit');
 
-// Dashboard User
+// User dashboard route
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 });
 
-// Login Admin
+// Admin login routes
 Route::get('/login-admin', [AdminLoginController::class, 'showLoginForm'])->name('auth.admin-login');
 Route::post('/login-admin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 
-// Route Khusus Admin (Hanya Bisa Diakses oleh Admin)
-
-
+// Admin-specific routes (accessible only to admins)
 Route::middleware(['auth', CheckIfAdmin::class])->group(function () {
     Route::get('/admin', [LocationController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/create', [LocationController::class, 'create'])->name('locations.create');
     Route::post('/admin/store', [LocationController::class, 'store'])->name('locations.store');
 });
 
-
-// Autentikasi Standar Laravel untuk User
+// Standard Laravel authentication routes for users
 Auth::routes();
 
-// Home Route untuk User
+// Home route for users
 Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
-Route::get('/location', function () {
-    return view('location');
-});
+Route::get('/location', [LocationController::class, 'showLocationAndDistance']);
