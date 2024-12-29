@@ -33,18 +33,22 @@
                     <div class="col-12 custom-container">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div class="d-flex align-items-center gap-2">
-                                <label for="entries" class="form-label mb-0">Show</label>
-                                <select name="entries" id="entries" class="form-select form-select-sm" style="width: auto;">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <span>entries</span>
+                                <form method="GET" action="{{ route('dashboard') }}">
+                                    <label for="entries" class="form-label mb-0">Show</label>
+                                    <select name="entries" id="entries" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()">
+                                        <option value="10" {{ $entries == 10 ? 'selected' : '' }}>10</option>
+                                        <option value="25" {{ $entries == 25 ? 'selected' : '' }}>25</option>
+                                        <option value="50" {{ $entries == 50 ? 'selected' : '' }}>50</option>
+                                        <option value="100" {{ $entries == 100 ? 'selected' : '' }}>100</option>
+                                    </select>
+                                    <span>entries</span>
+                                </form>
                             </div>
                             <div class="d-flex align-items-center gap-2 search-input">
-                                <label for="search" class="form-label mb-0">Search:</label>
-                                <input type="search" id="search" class="form-control" placeholder="Cari Data...">
+                                <form method="GET" action="{{ route('dashboard') }}">
+                                    <label for="search" class="form-label mb-0">Search:</label>
+                                    <input type="search" id="search" name="search" class="form-control" placeholder="Cari Data..." value="{{ $search }}">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -71,11 +75,26 @@
                                     'destination_longitude' => $location->longitude
                                 ]) }}" target="_blank">Link Map</a>
                             </td>
-                            <td><img src="{{ asset($location->photo) }}" alt="Image" class="img-fluid"></td>
+                            <td>
+                                @if ($location->photo)
+                                    <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}" class="img-fluid">
+                                @else
+                                    No Photo
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div>
+                        Showing {{ $locations->firstItem() }} to {{ $locations->lastItem() }} of {{ $locations->total() }} entries
+                    </div>
+                    <div>
+                        {{ $locations->withQueryString()->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

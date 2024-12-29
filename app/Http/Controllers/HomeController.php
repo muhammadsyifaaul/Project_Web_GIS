@@ -13,14 +13,21 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        // Mengambil data lokasi dari database
-        $locations = Location::all();
+        $search = $request->input('search');
+        $entries = $request->input('entries', 10);
+        $query = Location::query();
 
-        // Mengirimkan data ke view dashboard
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%");
+        }
+
+        $locations = $query->paginate($entries);
+
         return view('dashboard', [
             'locations' => $locations,
-            'userLatitude' => $request->input('user_latitude'),
-            'userLongitude' => $request->input('user_longitude'),
+            'search' => $search,
+            'entries' => $entries,
         ]);
     }
 }
