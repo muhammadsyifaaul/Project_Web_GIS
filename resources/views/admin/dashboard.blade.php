@@ -7,6 +7,7 @@
             <th>Photo</th>
             <th>Latitude</th>
             <th>Longitude</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,14 @@
                 </td>
                 <td>{{ $location->latitude }}</td>
                 <td>{{ $location->longitude }}</td>
+                <td>
+                    <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('locations.destroy', $location->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this location?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
     </tbody>

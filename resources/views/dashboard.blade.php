@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-<!-- Test merge -->
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-
 <body>
     <nav class="navbar">
         <div class="logo">
@@ -37,8 +34,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div class="d-flex align-items-center gap-2">
                                 <label for="entries" class="form-label mb-0">Show</label>
-                                <select name="entries" id="entries" class="form-select form-select-sm"
-                                    style="width: auto;">
+                                <select name="entries" id="entries" class="form-select form-select-sm" style="width: auto;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -64,35 +60,44 @@
                         </tr>
                     </thead>
                     <tbody class="custom-table p-5">
+                        @foreach($locations as $location)
                         <tr class="border-rad bg-primary !important mb-3">
-                            <td scope="row">1</td>
-                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, fuga?</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td><img src="image1.jpg" alt="Image 1" class="img-fluid"></td>
+                            <td scope="row">{{ $loop->iteration }}</td>
+                            <td>{{ $location->name }} | {{ $location->address }}</td>
+                            <td>{{ $location->phone }}</td>
+                            <td>
+                                <a class="map-link" href="{{ route('location.getRoute', [
+                                    'destination_latitude' => $location->latitude, 
+                                    'destination_longitude' => $location->longitude
+                                ]) }}" target="_blank">Link Map</a>
+                            </td>
+                            <td><img src="{{ asset($location->photo) }}" alt="Image" class="img-fluid"></td>
                         </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Jamal</td>
-                            <td>tdornton</td>
-                            <td>@fat</td>
-                            <td><img src="image2.jpg" alt="Image 2" class="img-fluid"></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>tdornton</td>
-                            <td><img src="image3.jpg" alt="Image 3" class="img-fluid"></td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const userLatitude = position.coords.latitude;
+                    const userLongitude = position.coords.longitude;
 
+                    document.querySelectorAll('.map-link').forEach(link => {
+                        const url = new URL(link.href);
+                        url.searchParams.set('user_latitude', userLatitude);
+                        url.searchParams.set('user_longitude', userLongitude);
+                        link.href = url.href;
+                    });
+                });
+            } else {
+                console.warn("Geolocation is not supported by this browser.");
+            }
+        });
+    </script>
+</body>
 </html>

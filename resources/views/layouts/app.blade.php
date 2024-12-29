@@ -14,13 +14,20 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+   
 <script src="{{ asset('js/app.js') }}" defer></script>
+
+
+    @viteReactRefresh
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="sidebar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,6 +79,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
         </nav>
 
         <main class="py-4">
