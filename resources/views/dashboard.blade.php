@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>dashboard</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -20,8 +20,19 @@
         .custom-table {
             margin-bottom: 30px; /* Jarak bagian bawah tabel */
             margin-left: 0.3rem;
+            border-spacing: 0; /* Menghilangkan spasi antar kolom */
         }
-        .td-link a{
+        .custom-container {
+            width: 100%; /* Lebar penuh untuk container */
+        }
+        .header-title {
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+        .container-fluid {
+            padding: 0 15px; /* Menghilangkan jarak kiri dan kanan */
+        }
+        .td-link a {
             text-decoration: none;
             padding: 0.5rem 1rem;
             background-color: aqua;
@@ -29,7 +40,10 @@
             font-weight: bold;
             border-radius: 8px;
         }
-       
+        .distance {
+            font-size: 0.9rem;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -54,61 +68,42 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-12">
-                        <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-                            <div class="d-flex align-items-center gap-2 nav-top">
-                                <form method="GET" action="{{ route('dashboard') }}">
-                                    <label for="entries" class="form-label mb-0">Show</label>
-                                    <select name="entries" id="entries" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()">
-                                        <option value="10" {{ $entries == 10 ? 'selected' : '' }}>10</option>
-                                        <option value="25" {{ $entries == 25 ? 'selected' : '' }}>25</option>
-                                        <option value="50" {{ $entries == 50 ? 'selected' : '' }}>50</option>
-                                        <option value="100" {{ $entries == 100 ? 'selected' : '' }}>100</option>
-                                    </select>
-                                    <span>entries</span>
-                                </form>
-                            </div>
-                            <div class="d-flex align-items-center gap-2 search-input">
-                                <form method="GET" action="{{ route('dashboard') }}">
-                                    <label for="search" class="form-label mb-0">Search:</label>
-                                    <input type="search" id="search" name="search" class="form-control" placeholder="Cari Data..." value="{{ $search }}">
-                                </form>
-                            </div>
-                        </div>
+                        <table class="table custom-table table-borderless">
+                            <thead style="border: none;">
+                                <tr>
+                                    <th scope="col" style="width: 5%;">NO</th>
+                                    <th scope="col" style="width: 40%;">NAMA LOKASI | ALAMAT</th>
+                                    <th scope="col" style="width: 15%;">TELEPON</th>
+                                    <th scope="col" style="width: 20%;">LINK MAP</th>
+                                    <th scope="col" style="width: 20%;">FOTO</th>
+                                </tr>
+                            </thead>
+                            <tbody class="custom-table p-5">
+                                @foreach($locations as $location)
+                                <tr class="border-rad !important mb-3">
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td><b>{{ $location->name }}</b> | {{ $location->address }}</td>
+                                    <td>-</td>
+                                    <td class="td-link">
+                                        <a class="map-link" data-latitude="{{ $location->latitude }}" data-longitude="{{ $location->longitude }}" href="{{ route('location.getRoute', [
+                                            'destination_latitude' => $location->latitude, 
+                                            'destination_longitude' => $location->longitude
+                                        ]) }}" target="_blank">Link Map</a>
+                                        <div class="distance" id="distance-{{ $loop->index }}"></div>
+                                    </td>
+                                    <td>
+                                        @if ($location->photo)
+                                            <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}" class="img-fluid">
+                                        @else
+                                            No Photo
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <table class="table custom-table table-borderless">
-                    <thead style="border: none;">
-                        <tr>
-                            <th scope="col" style="width: 5%;">NO</th>
-                            <th scope="col" style="width: 40%;">NAMA LOKASI | ALAMAT</th>
-                            <th scope="col" style="width: 15%;">TELEPON</th>
-                            <th scope="col" style="width: 20%;">LINK MAP</th>
-                            <th scope="col" style="width: 20%;">FOTO</th>
-                        </tr>
-                    </thead>
-                    <tbody class="custom-table p-5">
-                        @foreach($locations as $location)
-                        <tr class="border-rad bg-primary !important mb-3">
-                            <td scope="row">{{ $loop->iteration }}</td>
-                            <td><b>{{ $location->name }}</b> | {{ $location->address }}</td>
-                            <td>-</td>
-                            <td class="td-link">
-                                <a class="map-link" href="{{ route('location.getRoute', [
-                                    'destination_latitude' => $location->latitude, 
-                                    'destination_longitude' => $location->longitude
-                                ]) }}" target="_blank">Link Map</a>
-                            </td>
-                            <td>
-                                @if ($location->photo)
-                                    <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}" class="img-fluid">
-                                @else
-                                    No Photo
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
 
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <div>
@@ -121,6 +116,7 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -129,7 +125,16 @@
                     const userLatitude = position.coords.latitude;
                     const userLongitude = position.coords.longitude;
 
-                    document.querySelectorAll('.map-link').forEach(link => {
+                    document.querySelectorAll('.map-link').forEach((link, index) => {
+                        const destinationLatitude = link.getAttribute('data-latitude');
+                        const destinationLongitude = link.getAttribute('data-longitude');
+                        const distanceElement = document.getElementById(`distance-${index}`);
+
+                        // Calculate distance
+                        const distance = calculateDistance(userLatitude, userLongitude, destinationLatitude, destinationLongitude);
+                        distanceElement.textContent = `Jarak: ${distance} km`;
+
+                        // Update map link
                         const url = new URL(link.href);
                         url.searchParams.set('user_latitude', userLatitude);
                         url.searchParams.set('user_longitude', userLongitude);
@@ -140,6 +145,19 @@
                 console.warn("Geolocation is not supported by this browser.");
             }
         });
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in km
+            const dLat = (lat2 - lat1) * (Math.PI / 180);
+            const dLon = (lon2 - lon1) * (Math.PI / 180);
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c; // Distance in km
+            return distance.toFixed(2);
+        }
     </script>
 </body>
 </html>
