@@ -17,8 +17,12 @@
             width: 80px; /* Ukuran gambar lebih kecil */
             height: auto;
         }
+        .custom-table tr {
+            margin-top: 1rem;
+        }
         .custom-table {
             margin-bottom: 30px; /* Jarak bagian bawah tabel */
+            margin-top: 1rem;
             margin-left: 0.3rem;
             border-spacing: 0; /* Menghilangkan spasi antar kolom */
         }
@@ -31,6 +35,7 @@
         }
         .container-fluid {
             padding: 0 15px; /* Menghilangkan jarak kiri dan kanan */
+            min-height: 100vh;
         }
         .td-link a {
             text-decoration: none;
@@ -80,8 +85,8 @@
                             </thead>
                             <tbody class="custom-table p-5">
                                 @foreach($locations as $location)
-                                <tr class="border-rad !important mb-3">
-                                    <td scope="row">{{ $loop->iteration }}</td>
+                                <tr class="border-rad !important mb-3" style="margin-top: 1rem;">
+                                    <td scope="row">{{ $locations->firstItem() + $loop->index }}</td>
                                     <td><b>{{ $location->name }}</b> | {{ $location->address }}</td>
                                     <td>-</td>
                                     <td class="td-link">
@@ -110,7 +115,7 @@
                         Showing {{ $locations->firstItem() }} to {{ $locations->lastItem() }} of {{ $locations->total() }} entries
                     </div>
                     <div>
-                        {{ $locations->withQueryString()->links() }}
+                        {{ $locations->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

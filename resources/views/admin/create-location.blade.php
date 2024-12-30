@@ -72,7 +72,14 @@
     <div class="sidebar">
         <h4>{{ Auth::user()->name }}</h4> <!-- Nama admin secara otomatis dari database -->
         <a href="{{ route('dashboard') }}">Dashboard</a>
-        <a href="{{ route('logout') }}" class="logout">Logout</a>
+        <a class="logout" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
 
     <!-- Main Content -->

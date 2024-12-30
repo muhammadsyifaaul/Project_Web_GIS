@@ -9,12 +9,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
         .custom-table th, .custom-table td {
             text-align: center; 
             vertical-align: middle; 
         }
         .custom-table img {
-            width: 120px; 
+            width: 80px; 
             height: auto;
         }
         .custom-table {
@@ -35,14 +39,48 @@
         }
         .container-fluid {
             padding: 0 15px; /* Menghilangkan jarak kiri dan kanan */
-            margin-left: 0.5rem;
-
         }
         /* Menambahkan border-radius hanya untuk kolom action */
         .custom-table tbody tr:first-child td:last-child,
         .custom-table tbody tr:last-child td:last-child {
             border-top-right-radius: 15px; /* Border-radius untuk ujung kanan atas */
             border-bottom-right-radius: 15px; /* Border-radius untuk ujung kanan bawah */
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        .navbar-nav .nav-link {
+            color: #4a4a4a;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+        /* Pagination styling */
+        .pagination {
+            justify-content: center; /* Center the pagination */
+            margin-top: 20px; /* Add space above the pagination */
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #4a4a4a;
+            border-color: #4a4a4a;
+            color: #fff;
+        }
+        .pagination .page-link {
+            color: #4a4a4a;
+        }
+        .pagination .page-link:hover {
+            background-color: #f0f0f0;
+            color: #4a4a4a;
+        }
+        /* Responsiveness */
+        @media (max-width: 576px) {
+            .pagination {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -95,17 +133,17 @@
                     <tbody>
                         @foreach ($locations as $location)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $locations->firstItem() + $loop->index }}</td>
                                 <td><b>{{ $location->name }}</b></td>
                                 <td>{{ $location->address }}</td>
                                 <td>
                                     @if ($location->photo)
-                                        <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}" width="80">
+                                        <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}">
                                     @else
                                         No Photo
                                     @endif
                                 </td>
-                                <td style="border-radius: 0px">{{ $location->latitude }}</td>
+                                <td>{{ $location->latitude }}</td>
                                 <td>{{ $location->longitude }}</td>
                                 <td class="rounded-end">
                                     <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-primary">Edit</a>
@@ -125,7 +163,7 @@
                         Showing {{ $locations->firstItem() }} to {{ $locations->lastItem() }} of {{ $locations->total() }} entries
                     </div>
                     <div>
-                        {{ $locations->links() }}
+                        {{ $locations->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
@@ -134,4 +172,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
 </body>
+
 </html>

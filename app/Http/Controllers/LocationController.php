@@ -89,7 +89,7 @@ class LocationController extends Controller
             'name' => 'required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         $location = Location::findOrFail($id);
