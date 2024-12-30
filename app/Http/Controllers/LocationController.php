@@ -9,10 +9,29 @@ use Illuminate\Support\Facades\Storage;
 
 class LocationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $locations = Location::all();
-        return view('admin.dashboard', compact('locations'));
+        // Mengambil input untuk pagination dan search
+        $search = $request->input('search');
+        $entries = $request->input('entries', 10); // Default 10 entries per page
+
+        // Mengambil data lokasi dari database dengan pencarian dan pagination
+        $query = Location::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%");
+        }
+
+        $locations = $query->paginate($entries);
+
+        // Mengirimkan data ke view dashboard
+        return view('admin.dashboard', [
+            'locations' => $locations,
+            'search' => $search,
+            'entries' => $entries,
+        ]);
     }
 
     public function create()
@@ -58,6 +77,53 @@ class LocationController extends Controller
         return $data['results'][0]['formatted'] ?? 'Address not found';
     }
 
+    public function edit($id)
+    {
+        $location = Location::findOrFail($id);
+        return view('admin.edit-location', compact('location'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $location = Location::findOrFail($id);
+
+        $photoPath = $location->photo;
+        if ($request->hasFile('photo')) {
+            // Hapus file lama
+            if ($photoPath) {
+                Storage::disk('public')->delete($photoPath);
+            }
+            // Simpan file baru
+            $photoPath = $request->file('photo')->store('uploads', 'public');
+        }
+
+        $location->update([
+            'name' => $request->name,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'photo' => $photoPath,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Location updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $location = Location::findOrFail($id);
+        if ($location->photo) {
+            Storage::disk('public')->delete($location->photo);
+        }
+        $location->delete();
+        return redirect()->route('admin.dashboard')->with('success', 'Location deleted successfully!');
+    }
+
     public function getRoute(Request $request)
     {
         $userLatitude = $request->input('user_latitude');
@@ -70,51 +136,4 @@ class LocationController extends Controller
 
         return redirect($url);
     }
-    public function edit($id)
-{
-    $location = Location::findOrFail($id);
-    return view('admin.edit-location', compact('location'));
-}
-
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required',
-        'latitude' => 'required|numeric',
-        'longitude' => 'required|numeric',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
-
-    $location = Location::findOrFail($id);
-
-    $photoPath = $location->photo;
-    if ($request->hasFile('photo')) {
-        // Hapus file lama
-        if ($photoPath) {
-            Storage::disk('public')->delete($photoPath);
-        }
-        // Simpan file baru
-        $photoPath = $request->file('photo')->store('uploads', 'public');
-    }
-
-    $location->update([
-        'name' => $request->name,
-        'latitude' => $request->latitude,
-        'longitude' => $request->longitude,
-        'photo' => $photoPath,
-    ]);
-
-    return redirect()->route('admin.dashboard')->with('success', 'Location updated successfully!');
-}
-
-public function destroy($id)
-{
-    $location = Location::findOrFail($id);
-    if ($location->photo) {
-        Storage::disk('public')->delete($location->photo);
-    }
-    $location->delete();
-    return redirect()->route('admin.dashboard')->with('success', 'Location deleted successfully!');
-}
-
 }
