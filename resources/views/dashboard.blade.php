@@ -21,6 +21,14 @@
             margin-bottom: 30px; /* Jarak bagian bawah tabel */
             margin-left: 0.3rem;
         }
+        .td-link a{
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background-color: aqua;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 8px;
+        }
        
     </style>
 </head>
@@ -84,7 +92,7 @@
                             <td scope="row">{{ $loop->iteration }}</td>
                             <td><b>{{ $location->name }}</b> | {{ $location->address }}</td>
                             <td>-</td>
-                            <td>
+                            <td class="td-link">
                                 <a class="map-link" href="{{ route('location.getRoute', [
                                     'destination_latitude' => $location->latitude, 
                                     'destination_longitude' => $location->longitude
