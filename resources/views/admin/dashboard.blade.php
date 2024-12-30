@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         .custom-table th, .custom-table td {
-            text-align: center; /* Rata tengah untuk semua elemen tabel */
-            vertical-align: middle; /* Rata tengah untuk vertikal */
+            text-align: center; 
+            vertical-align: middle; 
         }
         .custom-table img {
-            width: 80px; /* Ukuran gambar lebih kecil */
+            width: 120px; 
             height: auto;
         }
         .custom-table {
-            margin-bottom: 30px; /* Jarak bagian bawah tabel */
-            border-spacing: 0; /* Menghilangkan spasi antar kolom */
+            margin-bottom: 30px; 
+            border-spacing: 0; 
             border-radius: 10px;
             padding: 0.5rem;
         }
         .custom-container {
-            width: 100%; /* Lebar penuh untuk container */
+            width: 100%; 
         }
         .btn {
             margin-right: 5px;
