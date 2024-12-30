@@ -8,6 +8,21 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <style>
+        .custom-table th, .custom-table td {
+            text-align: center; /* Rata tengah untuk semua elemen tabel */
+            vertical-align: middle; /* Rata tengah untuk vertikal */
+        }
+        .custom-table img {
+            width: 80px; /* Ukuran gambar lebih kecil */
+            height: auto;
+        }
+        .custom-table {
+            margin-bottom: 30px; /* Jarak bagian bawah tabel */
+            margin-left: 0.3rem;
+        }
+       
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -26,13 +41,13 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row custom-table mt-5 rounded-3">
-            <div class="col-md-12 mt-5">
+            <div class="col-12">
                 <div class="row">
-                    <div class="col-12 custom-container">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div class="d-flex align-items-center gap-2">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                            <div class="d-flex align-items-center gap-2 nav-top">
                                 <form method="GET" action="{{ route('dashboard') }}">
                                     <label for="entries" class="form-label mb-0">Show</label>
                                     <select name="entries" id="entries" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()">
@@ -67,8 +82,8 @@
                         @foreach($locations as $location)
                         <tr class="border-rad bg-primary !important mb-3">
                             <td scope="row">{{ $loop->iteration }}</td>
-                            <td>{{ $location->name }} | {{ $location->address }}</td>
-                            <td>{{ $location->phone }}</td>
+                            <td><b>{{ $location->name }}</b> | {{ $location->address }}</td>
+                            <td>-</td>
                             <td>
                                 <a class="map-link" href="{{ route('location.getRoute', [
                                     'destination_latitude' => $location->latitude, 
